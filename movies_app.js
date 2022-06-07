@@ -18,7 +18,7 @@ const renderMovieHTML = () => {
         console.log(data);
         let MovieCards = data.map(movie => {
             return `
-            <div>
+            <div id="new">
             <h3>Title: ${movie.title}</h3>
             <p>Artist: ${movie.director}</p>
             <p>Rating: ${movie.rating}</p>
@@ -28,13 +28,14 @@ const renderMovieHTML = () => {
             `
         })
         console.log(MovieCards);
-        document.getElementById("library").innerHTML = MovieCards.join("");
+  const editbut =   document.getElementById("library").innerHTML = MovieCards.join("");
+        console.log(editbut);
     }).then(() => {
         $("#edit").click(function(){
-            $(this).append("<form> </form>")
+            $('#new').append("<form>title<input class='inputedit' type='text'> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>")
         })
 
-        })
+    })
 
 }
 renderMovieHTML();
