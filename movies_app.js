@@ -136,18 +136,18 @@ document.getElementById("addMovie").addEventListener("click", function (e) {
 
 
 
-//
-// // DELETE METHOD
-//
-// const deleteSong = (id) => {
-//     const URL = "https://acoustic-little-chive.glitch.me/songs";
-//     let options = {
-//         method: "DELETE",
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     }
-//     return fetch(`${URL}/${id}`, options).then(() => console.log("The song has been deleted successfully")).then(renderSongHTML)
-// }
-//
-// deleteSong(1);
+
+// DELETE METHOD
+
+const deleteMovie = (id) => {
+    const URL = "https://lean-imported-ballcap.glitch.me/movies";
+    let options = {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`${URL}/${id}`, options).then(() => console.log("The movie has been deleted successfully")).then(renderMovieHTML)
+}
+
+deleteMovie(1);
