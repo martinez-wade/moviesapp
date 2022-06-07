@@ -33,9 +33,17 @@ const renderMovieHTML = () => {
         return data;
     }).then((data) => {
         console.log(data)
+        // renderSongHTML();
+
+        // FETCH A SONG BY ID
+
+        const getMovieById = (id) => {
+            const URL = `https://lean-imported-ballcap.glitch.me/movies/ {id}`;
+            return fetch(URL).then(res => res.json()).then(res => console.log(res));
+        }
         $(".edit").click(function(){
            console.log($(this).attr("data-id"));
-            // $('#new').append(`<form>title<input class='inputedit' type='text' value="${data.title}"> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>`)
+            $('#new').append(`<form>title<input class='inputedit' type='text' value="${data.title}"> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>`)
         })
 
     })
