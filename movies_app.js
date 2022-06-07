@@ -22,17 +22,20 @@ const renderMovieHTML = () => {
             <h3>Title: ${movie.title}</h3>
             <p>Artist: ${movie.director}</p>
             <p>Rating: ${movie.rating}</p>
-            <button data-id="${movie.id}" id="edit">Edit</button>
-            <button data-id="${movie.id}"id="delete">Delete</button>
+            <button data-id="${movie.id}" class="edit">Edit</button>
+            <button data-id="${movie.id}"class="delete">Delete</button>
             </div>
             `
         })
-        console.log(MovieCards);
+
   const editbut =   document.getElementById("library").innerHTML = MovieCards.join("");
         console.log(editbut);
-    }).then(() => {
-        $("#edit").click(function(){
-            $('#new').append("<form>title<input class='inputedit' type='text'> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>")
+        return data;
+    }).then((data) => {
+        console.log(data)
+        $(".edit").click(function(){
+           console.log($(this).attr("data-id"));
+            // $('#new').append(`<form>title<input class='inputedit' type='text' value="${data.title}"> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>`)
         })
 
     })
