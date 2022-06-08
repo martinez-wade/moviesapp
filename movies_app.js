@@ -22,7 +22,7 @@ const renderMovieHTML = () => {
             <h3>Title: ${movie.title}</h3>
             <p>Artist: ${movie.director}</p>
             <p>Rating: ${movie.rating}</p>
-            <button data-id="${movie.id}" class="edit">Edit</button>
+            <button data-id="${movie.id}" data-title="${movie.title}" data-director="${movie.director}" data-rating="${movie.rating}" class="edit">Edit</button>
             <button data-id="${movie.id}"class="delete">Delete</button>
             </div>
             `
@@ -35,8 +35,11 @@ const renderMovieHTML = () => {
         console.log(data)
         $(".edit").click(function(){
            console.log($(this).attr("data-id"));
-            // $('#new').append(`<form>title<input class='inputedit' type='text' value="${data.title}"> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>`)
-        })
+            $('#new').append(`<form>title<input class='inputedit' type='text' value="${$(this).attr("data-title")}"> </form><form>director<input class='editd' type='text' value="${$(this).attr("data-director")}"> </form><form>rating<input class='editd' type='text' value="${$(this).attr("data-rating")}"> </form> <button class="addchange">submit</button>`)
+            $(".addchange").click(renderMovieHTML)
+
+            console.log(data[0].title);
+        });
 
     })
 
