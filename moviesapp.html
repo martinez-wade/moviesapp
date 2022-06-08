@@ -5,10 +5,14 @@
     <title>moviesapp</title>
 
     <script src="jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="loading.css">
 
 
 </head>
 <body>
+<div id="loading">
+    <img id="loading-image" src="path/to/ajax-loader.gif" alt="Loading..." />
+</div>
 <h1>RESTful API Requests</h1>
 <form>
     <label for="title">Title </label>
@@ -19,10 +23,16 @@
     <input type="number" id="rating" name="rating" min="1" max="5 ">
     <button id="addMovie">Add Movie</button>
 </form>
+<div id="editForm"></div>
 
 <script src="movies_app.js"></script>
 <div id="library"></div>
 
+<script>
+    $(window).on('load', function () {
+        $('#loading').hide();
+    })
+</script>
 
 </body>
 </html>

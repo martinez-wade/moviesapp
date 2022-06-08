@@ -17,9 +17,9 @@ const renderMovieHTML = () => {
         console.log(data);
         let MovieCards = data.map(movie => {
             return `
-            <div id="new">
+            <div>
             <h3>Title: ${movie.title}</h3>
-            <p>Artist: ${movie.director}</p>
+            <p>Director: ${movie.director}</p>
             <p>Rating: ${movie.rating}</p>
             <button data-id="${movie.id}" data-title="${movie.title}" data-director="${movie.director}" data-rating="${movie.rating}" class="edit">Edit</button>
             <button data-id="${movie.id}"class="delete">Delete</button>
@@ -28,7 +28,7 @@ const renderMovieHTML = () => {
         })
 
         const editbut = document.getElementById("library").innerHTML = MovieCards.join("");
-        console.log(editbut);
+
         return data;
     }).then((data) => {
         console.log(data)
@@ -37,15 +37,21 @@ const renderMovieHTML = () => {
         // FETCH A SONG BY ID
 
         const getMovieById = (id) => {
-            const URL = `https://lean-imported-ballcap.glitch.me/movies/ {id}`;
+            const URL = `https://lean-imported-ballcap.glitch.me/movies/ ${id}`;
             return fetch(URL).then(res => res.json()).then(res => console.log(res));
         }
+        //edit button!
         $(".edit").click(function () {
             const ID= $(this).attr("data-id");
-            $('#new').append(`<form>title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}"> </form><form>director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}"> </form><form>rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}"> </form> <button class="addchange">submit</button>`)
+            $('#editForm').html(`<form>title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}">director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}">rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}"> <input type="hidden" value="${ID}" id="editedID"></form> <button class="addchange">submit</button>`)
             $(".addchange").click(function(){
+                let movieID = $("#editedID").val()
+                console.log(movieID)
+                const URL = `https://lean-imported-ballcap.glitch.me/movies/${movieID}`;
+                console.log(URL);
+                // fetch(URL).then(res=>res.json()).then(result => result)
                 let editedMovie = {
-                    id: ID,
+                    id: movieID,
                     title:  $("#title1").val(),
                     director: $("#director1").val(),
                     rating: $("#rating1").val()
@@ -78,7 +84,7 @@ const editMovie = (movie) => {
         body: JSON.stringify(movie) // convert the JS object into a JSON String before sending it to the server.
     }
 
-    return fetch(`${URL}/${movie.id}`, options).then(resp => resp.json().then())
+    return fetch(`${URL}/${movie.id}`, options).then(resp => resp.json()).then(() => renderMovieHTML())
 }
 
 
