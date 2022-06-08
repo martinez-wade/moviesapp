@@ -10,17 +10,17 @@
 
 </head>
 <body>
-<div id="loading">
+<div class="loading">
     <img id="loading-image" src="path/to/ajax-loader.gif" alt="Loading..." />
 </div>
-<h1>RESTful API Requests</h1>
+<h1>Movie APP</h1>
 <form>
-    <label for="title">Title </label>
+    <label for="title"><b>Title</b></label>
     <input type="text" id="title" name="title">
-    <label for="director">Director: </label>
+    <label for="director"><b>Director:</b> </label>
     <input type="text" id="director" name="director">
-    <label for="rating">Rating </label>
-    <input type="number" id="rating" name="rating" min="1" max="5 ">
+    <label for="rating"><b>Rating</b></label>
+    <input type="number" id="rating" name="rating" min="1" max="5">
     <button id="addMovie">Add Movie</button>
 </form>
 <div id="editForm"></div>
@@ -29,9 +29,9 @@
 <div id="library"></div>
 
 <script>
-    $(window).on('load', function () {
-        $('#loading').hide();
-    })
+    // $(window).on('load', function () {
+    //     $('#loading').addClass('hideme');
+    // })
 </script>
 
 </body>

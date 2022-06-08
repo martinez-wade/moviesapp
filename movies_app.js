@@ -2,6 +2,7 @@
 
 
 // FETCH ALL SONGS
+$(document).ready(function(){
 
 
 const movies = () => {
@@ -14,6 +15,8 @@ movies();
 const renderMovieHTML = () => {
     console.log("Rendering movies HTML")
     movies().then((data) => {
+        $('body').removeClass('loading');
+        console.log("HI HI");
         console.log(data);
         let MovieCards = data.map(movie => {
             return `
@@ -25,6 +28,7 @@ const renderMovieHTML = () => {
             <button data-id="${movie.id}"class="delete">Delete</button>
             </div>
             `
+
         })
 
         const editbut = document.getElementById("library").innerHTML = MovieCards.join("");
@@ -40,10 +44,18 @@ const renderMovieHTML = () => {
             const URL = `https://lean-imported-ballcap.glitch.me/movies/ ${id}`;
             return fetch(URL).then(res => res.json()).then(res => console.log(res));
         }
+        $('.delete').click(function() {
+            let deletedID = $(this).attr('data-id')
+            deleteMovie(deletedID);
+
+        })
+
+
         //edit button!
         $(".edit").click(function () {
-            const ID= $(this).attr("data-id");
-            $('#editForm').html(`<form>title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}">director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}">rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}"> <input type="hidden" value="${ID}" id="editedID"></form> <button class="addchange">submit</button>`)
+            const ID= $(this).attr("data-id")
+            console.log(ID);
+            $('#editForm').html(`<form>New Title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}">New Director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}"> Your Rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}" min="1" max="5"> <input type="hidden" value="${ID}" id="editedID"></form> <button class="addchange">submit</button>`)
             $(".addchange").click(function(){
                 let movieID = $("#editedID").val()
                 console.log(movieID)
@@ -58,17 +70,23 @@ const renderMovieHTML = () => {
                 }
                 editMovie(editedMovie)
                 console.log(editedMovie);
-            })
 
 
 
 
-
+                // let deleted = $('.delete').click(function(){
+                //     return movie.id
+                // })
+            });
 
         });
     })
 
+
 }
+
+
+
 renderMovieHTML();
 
 
@@ -126,7 +144,7 @@ document.getElementById("addMovie").addEventListener("click", function (e) {
 // DELETE METHOD
 
 const deleteMovie = (id) => {
-    const URL = "https://lean-imported-ballcap.glitch.me/movies";
+    const URL = `https://lean-imported-ballcap.glitch.me/movies`;
     let options = {
         method: "DELETE",
         headers: {
@@ -136,4 +154,10 @@ const deleteMovie = (id) => {
     return fetch(`${URL}/${id}`, options).then(() => console.log("The movie has been deleted successfully")).then(renderMovieHTML)
 }
 
-deleteMovie(1);
+// deleteMovie();
+
+
+
+
+//END JQUERY DON"T GO UNDER
+});
