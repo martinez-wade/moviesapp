@@ -1,7 +1,6 @@
 "use strict";
 
 
-
 // FETCH ALL SONGS
 
 
@@ -28,7 +27,7 @@ const renderMovieHTML = () => {
             `
         })
 
-  const editbut =   document.getElementById("library").innerHTML = MovieCards.join("");
+        const editbut = document.getElementById("library").innerHTML = MovieCards.join("");
         console.log(editbut);
         return data;
     }).then((data) => {
@@ -41,15 +40,27 @@ const renderMovieHTML = () => {
             const URL = `https://lean-imported-ballcap.glitch.me/movies/ {id}`;
             return fetch(URL).then(res => res.json()).then(res => console.log(res));
         }
-        $(".edit").click(function(){
-           console.log($(this).attr("data-id"));
-            $('#new').append(`<form>title<input class='inputedit' type='text' value="${$(this).attr("data-title")}"> </form><form>director<input class='editd' type='text' value="${$(this).attr("data-director")}"> </form><form>rating<input class='editd' type='text' value="${$(this).attr("data-rating")}"> </form> <button class="addchange">submit</button>`)
-            $(".addchange").click(renderMovieHTML)
+        $(".edit").click(function () {
+            const ID= $(this).attr("data-id");
+            $('#new').append(`<form>title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}"> </form><form>director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}"> </form><form>rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}"> </form> <button class="addchange">submit</button>`)
+            $(".addchange").click(function(){
+                let editedMovie = {
+                    id: ID,
+                    title:  $("#title1").val(),
+                    director: $("#director1").val(),
+                    rating: $("#rating1").val()
+                }
+                editMovie(editedMovie)
+                console.log(editedMovie);
+            })
 
-            console.log(data[0].title);
+
+
+
+
+
         });
-            $('#new').append(`<form>title<input class='inputedit' type='text' value="${data.title}"> </form><form>director<input class='editd' type='text'> </form><form>rating<input class='editd' type='text'> </form> <button>submit</button>`)
-        })
+    })
 
 }
 renderMovieHTML();
@@ -70,10 +81,8 @@ const editMovie = (movie) => {
     return fetch(`${URL}/${movie.id}`, options).then(resp => resp.json().then())
 }
 
-let editedMovie = {
-    tittle: 1,
-    title: "TNT",
-}
+
+
 
 // editSong(editedSong);
 
@@ -106,18 +115,6 @@ document.getElementById("addMovie").addEventListener("click", function (e) {
         renderMovieHTML()
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // DELETE METHOD
