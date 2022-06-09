@@ -1,7 +1,7 @@
 "use strict";
 
 
-// FETCH ALL SONGS
+// FETCH ALL movies
 $(document).ready(function(){
 
 
@@ -15,7 +15,7 @@ movies();
 const renderMovieHTML = () => {
     console.log("Rendering movies HTML")
     movies().then((data) => {
-        $('body').removeClass('loading');
+        $('.loader').hide();
         console.log("HI HI");
         console.log(data);
         let MovieCards = data.map(movie => {
@@ -55,7 +55,7 @@ const renderMovieHTML = () => {
         $(".edit").click(function () {
             const ID= $(this).attr("data-id")
             console.log(ID);
-            $('#editForm').html(`<form>New Title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}">New Director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}"> Your Rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}" min="1" max="5"> <input type="hidden" value="${ID}" id="editedID"></form> <button class="addchange">submit</button>`)
+            $('#editForm').html(`<form class="card bg-warning form-floating ">New Title<input id="title1" class='inputedit' type='text' value="${$(this).attr("data-title")}">New Director<input id="director1" class='editd' type='text' value="${$(this).attr("data-director")}"> Your Rating<input class='editd' id="rating1" type='number' value="${$(this).attr("data-rating")}" min="1" max="5"> <input type="hidden" value="${ID}" id="editedID"><button class="addchange">submit</button></form> `)
             $(".addchange").click(function(){
                 let movieID = $("#editedID").val()
                 console.log(movieID)
